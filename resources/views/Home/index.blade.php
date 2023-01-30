@@ -1,8 +1,12 @@
 @extends('Sidebar.sidebar')
-@section('title','Home')
+@section('title', 'Home')
+@section('style')
+    .h1 {
+    color: red;
+    }
+@endsection
 @section('content')
-    <h1>
+    <div>
         Content home uploaded to github
-
-    </h1>
+    </div>
 @endsection
