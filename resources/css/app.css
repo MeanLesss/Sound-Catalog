@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Kodchasan';
+    src: url('/public/fonts/Kodchasan-Light.ttf') format('truetype')
+}
+h1{
+    font-family: 'kodchasan';
+    color:red;
+}
