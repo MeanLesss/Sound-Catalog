@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SoundController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class,'index']);
-Route::get('/home', [HomeController::class,'index']);
 Route::get('/sidebar',function(){
     return view('Sidebar.sidebar');
 });
+Route::get('/home', [HomeController::class,'index']);
+Route::get('/sound', [SoundController::class,'index']);
