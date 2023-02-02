@@ -23,10 +23,12 @@
             background: linear-gradient(169deg, rgba(60, 185, 252, 1) 0%,
                     rgba(181, 55, 242, 1) 61%, rgba(138, 43, 226, 1) 100%);
         }
-        .content{
+
+        .content {
             width: 100%;
-            height:100%;
+            height: 100%;
         }
+
         .sidebar {
             width: 20%;
             height: 100%;
@@ -34,15 +36,17 @@
         }
 
         .btn {
-            margin: 5px;
+            /* margin: 5px; */
             color: whitesmoke;
-            max-width: 200px;
+            /* max-width: 200px; */
         }
-        .sideBtn{
+
+        .sideBtn {
             margin: 5px;
             color: whitesmoke;
             width: 70%;
         }
+
         .btn:hover {
             color: #120052;
             border: 3px solid #120052;
@@ -51,6 +55,56 @@
         .logo {
             display: flex;
             justify-content: center;
+        }
+
+        .card {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        .card .view {
+            -webkit-border-top-left-radius: 10px;
+            border-top-left-radius: 10px;
+            -webkit-border-top-right-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card h5 a {
+            color: #0d47a1;
+        }
+
+        .card h5 a:hover {
+            color: #072f6b;
+        }
+
+        #pButton {
+            float: left;
+        }
+
+        #timeline {
+            width: 90%;
+            height: 2px;
+            margin-top: 20px;
+            margin-left: 10px;
+            float: left;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        #pButton {
+            margin-top: 12px;
+            cursor: pointer;
+        }
+
+        #playhead {
+            width: 8px;
+            height: 8px;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            margin-top: -3px;
+            background: black;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -65,7 +119,7 @@
             </div>
 
             {{-- content block --}}
-            <div class="d-flex flex-row justify-content-start align-items-center p-3 m-0 content gap-3">
+            <div class="d-flex flex-column justify-content-start align-items-center p-3 m-0 content gap-3">
                 @yield('content')
             </div>
         </div>
@@ -73,6 +127,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
+    <script src="https://kit.fontawesome.com/b4b848ea5a.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
