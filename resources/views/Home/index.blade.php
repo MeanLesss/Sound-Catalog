@@ -1,7 +1,7 @@
 @extends('Sidebar.sidebar')
 @section('title', 'Home')
 @section('content')
-<div class="d-flex flex-row justify-content-start align-items-center content">
+<div class="d-flex flex-row justify-content-start align-items-center content" style="width: 100%;height: 100%;">
     <div class="d-flex flex-column justify-content-start gap-2">
         <h1>
             Welcome to MeanLess Sound
