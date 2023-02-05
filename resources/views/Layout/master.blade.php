@@ -25,10 +25,10 @@
                     rgba(181, 55, 242, 1) 61%, rgba(138, 43, 226, 1) 100%);
         }
 
-        /* .content {
+        .content {
             width: 100%;
             height: 100%;
-        } */
+        }
 
         .sidebar {
             width: 20%;
