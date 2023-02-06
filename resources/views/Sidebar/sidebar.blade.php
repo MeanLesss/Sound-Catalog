@@ -11,6 +11,9 @@
             <a class="nav-item sideBtn btn {{ Request::segment(1) === 'signup' ? 'active' : '' }}" href="/signup">Sign up</a>
         </nav>
     @endif
+    @if (auth()->check())
+        <h1 class="logo">{{ auth()->user()->name }}</h1>
+    @endif
     <nav class="nav flex-column justify-content-center align-items-center" style="height: 60%;">
         <a class="nav-item sideBtn btn {{ Request::segment(1) === 'home' ? 'active' : '' }}" href="/home">Home</a>
         <a class="nav-item sideBtn btn {{ Request::segment(1) === 'sound' ? 'active' : '' }}" href="/sound">Sound</a>
