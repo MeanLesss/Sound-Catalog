@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use function Ramsey\Uuid\v1;
-
-class LoginController extends Controller
+class SignUpController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,23 +14,7 @@ class LoginController extends Controller
     public function index()
     {
         //
-        return view('Home.login');
-    }
-    public function auth(Request $request)
-    {
-        $cred = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-        if (Auth::attempt($cred)) {
-            $request->session()->regenerate();
-            Session::put('logout', false);
-
-            return redirect('/home');
-        }
-        return back()->withErrors([
-            'email' => 'Invalid email or password. test'
-        ])->onlyInput('email');
+        return view('Home.signup');
     }
 
     /**

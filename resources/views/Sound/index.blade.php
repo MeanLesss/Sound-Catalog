@@ -1,5 +1,5 @@
 @extends('Sidebar.sidebar')
-@section('title', 'sound')
+@section('title', 'Sound')
 @section('content')
 
     <h1>Find the sound suit your project.</h1>

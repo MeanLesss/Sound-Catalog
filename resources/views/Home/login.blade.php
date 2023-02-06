@@ -1,5 +1,5 @@
 @extends('Sidebar.sidebar')
-@section('title', 'sound')
+@section('title', 'Log in')
 @section('content')
     <div class="d-flex flex-column justify-content-center align-items-center content">
         @if ($errors->any())
