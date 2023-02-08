@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
+// use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class SignUpController extends Controller
 {
@@ -35,7 +38,24 @@ class SignUpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
+            'confirmPassword' => ['required'],
+        ]);
+        if ($request->password == $request->confirmPassword) {
+            $user = new User($request->all());
+            $user->password = Hash::make($request->password);
+            $user->statusBan = 0;
+            $user->save();
+            return redirect(route('Home.index'))->with('status', 'Sign up successfully');
+
+            if ($user->save()) {
+            }else {
+                return back()->withInput()->with('statuses', $user->getErrors());
+            }
+        }
     }
 
     /**

@@ -56,6 +56,7 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         //
+        return view('Sound.index');
     }
 
     /**

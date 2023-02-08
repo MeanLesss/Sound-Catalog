@@ -25,11 +25,10 @@ Route::get('/sidebar',function(){
 Route::get('/home', [HomeController::class,'index']);
 Route::get('/sound', [SoundController::class,'index']);
 Route::get('/signup', [SignUpController::class,'index']);
+Route::post('/signup', [SignUpController::class,'store'])->name('signup.store');
 // Get login is to redirect to login page
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 //Post login is to handle when submitted form login
 Route::post('/login', [LoginController::class,'auth'])->name('login.auth');
-//middleware is to handle when the user is login and redirect to topic view
-Route::middleware('auth')->resource('/topic', TopicController::class);
 //logout route
 Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');
