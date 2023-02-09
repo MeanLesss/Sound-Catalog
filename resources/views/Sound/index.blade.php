@@ -17,9 +17,10 @@
                         <a class="dropdown-item" href="#">Separated link</a>
                     </div> --}}
             </div>
+            <a class="btn btn-danger btn-outline-secondary" href="/sound/add">Add Sound ➕</a>
             <input type="text" class="rounded form-control" placeholder="Search your sound"
                 aria-label="Text input with dropdown button">
-            <a class="btn btn-outline-secondary" href="#">Search</a>
+            <a class="btn btn-outline-secondary" href="#">Search 🔍</a>
         </div>
     </div>
     {{-- Cards container  --}}

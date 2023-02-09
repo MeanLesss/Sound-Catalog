@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddSoundController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SoundController;
 use App\Http\Controllers\LoginController;
@@ -24,6 +25,8 @@ Route::get('/sidebar',function(){
 });
 Route::get('/home', [HomeController::class,'index']);
 Route::get('/sound', [SoundController::class,'index']);
+Route::get('/sound/add', [AddSoundController::class, 'index']);
+Route::post('/sound/add',[AddSoundController::class,'index'])->name('sound.add');
 Route::get('/signup', [SignUpController::class,'index']);
 Route::post('/signup', [SignUpController::class,'store'])->name('signup.store');
 // Get login is to redirect to login page

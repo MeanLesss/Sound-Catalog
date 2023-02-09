@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use function Ramsey\Uuid\v1;
 
@@ -29,7 +30,6 @@ class LoginController extends Controller
         if (Auth::attempt($cred)) {
             $request->session()->regenerate();
             Session::put('logout', false);
-
             return redirect('/home');
         }
         return back()->withErrors([

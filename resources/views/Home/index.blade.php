@@ -14,4 +14,5 @@
     <iframe src='https://my.spline.design/miniroomcopy-77dadaa0340eb544536408f876f8f149/' frameborder='0' width='100%'
     height='100%'></iframe>
 </div>
-    @endsection
+
+@endsection
