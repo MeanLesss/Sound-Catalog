@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
-// use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 
 class SignUpController extends Controller
@@ -34,7 +32,7 @@ class SignUpController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+    //  * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -48,10 +46,9 @@ class SignUpController extends Controller
             $user = new User($request->all());
             $user->password = Hash::make($request->password);
             $user->statusBan = 0;
-            $user->save();
-            return redirect(route('Home.index'))->with('status', 'Sign up successfully');
-
+            // $user->save();
             if ($user->save()) {
+                return redirect()->route('login')->with('status', 'Sign up successfully');
             }else {
                 return back()->withInput()->with('statuses', $user->getErrors());
             }
