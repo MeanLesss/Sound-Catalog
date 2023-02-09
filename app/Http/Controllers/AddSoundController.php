@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AddSoundController extends Controller
 {
@@ -36,7 +37,12 @@ class AddSoundController extends Controller
     public function store(Request $request)
     {
         //
+        Auth::User()->id;
+        $upload = $request->validate([
+            'uploadSound'=>'required',
+            'title' => 'required',
 
+        ]);
     }
 
     /**
