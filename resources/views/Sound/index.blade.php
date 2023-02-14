@@ -26,31 +26,26 @@
     {{-- Cards container  --}}
     <div class="d-flex flex-row flex-wrap gap-3" style="overflow: auto">
 
-        @foreach($sounds as $item)
-        <!-- Card -->
-        <div class="card" style="width: 350px;height: 500px;">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img class="card-img-top" src="{{asset($item->imagePath)}}"
-                    alt="Card image cap">
-                <a href="#!">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
-            </div>
-            <div class="card-body text-center">
+        @foreach ($sounds as $item)
+            <!-- Card -->
+            <div class="card" style="width: 350px;height: 500px;">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img class="card-img-top" src="{{ asset($item->imagePath) }}" alt="Card image cap"
+                        style="width:340px ;height:300px">
+                </div>
+                <div class="card-body text-center">
 
-                <h5 class="h5 font-weight-bold"><a href="#" target="_blank">{{$item->title}}</a></h5>
-                <p class="mb-0">{{$item->description}}</p>
+                    <h5 class="h5 font-weight-bold"><a href="#" target="_blank">{{ $item->title }}</a></h5>
+                    <p class="mb-0">{{ $item->description }}</p>
 
-                <audio id="music" preload="true" controls>
-                    <source src="{{asset($item->soundPath)}}'" type="audio/mpeg">
-                    <source src="{{asset($item->soundPath)}}'" type="audio/wav">
-                    {{-- <source src="{{asset($item->soundPath)}}'" type="audio/mpeg">
-                    <source src="{{asset($item->soundPath)}}'" type="audio/wav"> --}}
-                    {{-- <source src="{{asset($item->soundPath)}}'" type="audio/ogg"> --}}
-                </audio>
+                    <audio id="music" preload="true" controls download>
+                        {{-- <source src="{{ asset('sounds\\Winning Sound.mp3') }}" type="audio/mpeg"> --}}
+                        <source src="{{ asset($item->soundPath) }}" type="audio/mpeg">
+                        <source src="{{ asset($item->soundPath) }}" type="audio/wav">
+                    </audio>
+                </div>
             </div>
-        </div>
-        <!-- Card -->
+            <!-- Card -->
         @endforeach
     </div>
     {{-- <audio id="indie" src="{{ asset('sounds\\Winning Sound.mp3') }}" preload="auto" controls></audio> --}}

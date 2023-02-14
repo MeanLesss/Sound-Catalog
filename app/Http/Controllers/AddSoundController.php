@@ -63,9 +63,9 @@ class AddSoundController extends Controller
             $fname = $request->file('soundPath');
             $originalname = $request->file('soundPath')->getClientOriginalName();
             $request->file('soundPath')->move(public_path() . '/sounds', $originalname);
-            $sound->soundPath = '/sounds/' . $originalname;
+            $sound->soundPath = 'sounds\\' . $originalname;
         } else {
-            $sound->soundPath = '/sounds/Losing Sound.mp3';
+            $sound->soundPath = 'sounds\\Losing Sound.mp3';
         }
         // //image path get
 
