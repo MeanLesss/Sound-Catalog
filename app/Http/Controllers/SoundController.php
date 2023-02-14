@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sound;
 use Illuminate\Http\Request;
 
 class SoundController extends Controller
@@ -9,18 +10,19 @@ class SoundController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+    //  * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
-        return view('Sound.index');
+        return view('Sound.index',['sounds' => Sound::all()]);
+
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+    //  * @return \Illuminate\Http\Response
      */
     public function create()
     {

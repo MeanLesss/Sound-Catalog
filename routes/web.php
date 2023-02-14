@@ -24,9 +24,10 @@ Route::get('/sidebar',function(){
     return view('Sidebar.sidebar');
 });
 Route::get('/home', [HomeController::class,'index']);
-Route::get('/sound', [SoundController::class,'index']);
+Route::get('/sound', [SoundController::class,'index'])->name('sound');
 Route::get('/sound/add', [AddSoundController::class, 'index']);
-Route::post('/sound/add',[AddSoundController::class,'index'])->name('sound.add');
+// Route::resource('/sound/add',AddSoundController::class);
+Route::post('/sound/add',[AddSoundController::class,'store'])->name('sound.add');
 Route::get('/signup', [SignUpController::class,'index']);
 Route::post('/signup', [SignUpController::class,'store'])->name('signup.store');
 // Get login is to redirect to login page

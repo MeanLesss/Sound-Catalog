@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Sound extends Model
 {
     use HasFactory;
+    protected $fillable = ['userId','title','description','soundPath','imagePath','statusApprove'];
 }

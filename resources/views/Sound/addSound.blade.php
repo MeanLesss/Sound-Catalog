@@ -2,21 +2,39 @@
 @section('title', 'Add sound')
 @section('content')
     @if (auth()->check())
-        {{-- {{auth()->user()->id}} --}}
+        {{-- {{ auth()->user()->id }} --}}
 
         <div class="d-flex justify-content-center align-items-center " style="height: 100%;">
-            {!! Form::open(['route' => 'sound.add', 'method' => 'POST', 'style' => 'max-width:50%;width:30%;']) !!}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $er)
+                        {{ $er }}<br />
+                    @endforeach
+                </div>
+            @endif
+            {{-- {!! Form::model([
+                'route' => ['sound.add'],
+                'method'=> 'POST',
+                'class' => 'form',
+                'files' => 'true',
+                'style' => 'max-width:50%;width:30%;',
+            ]) !!} --}}
+            <form action="{{url('sound/add')}}" method="POST" enctype="multipart/form-data" file="true">
+                @csrf
             <h1>Add Sound 🎵</h1>
 
             <div class="form-floating mb-3">
-                <input type="file" accept=".mp3, .wav" class="form-control" name="uploadSound" id="floatingInput"
+                <input type="file" accept=".mp3, .wav" class="form-control" id="soundPath" name="soundPath" id="floatingInput"
                     placeholder="Upload Sound">
                 <label for="floatingInput">Upload sound</label>
+            {{-- {!!Form::file('soundPath')!!} --}}
+
             </div>
             <div class="form-floating mb-3">
-                <input type="file" accept="image/png, image/jpeg" class="form-control" name="uploadImage"
+                <input type="file" accept="image/png, image/jpeg" class="form-control" name="imagePath"
                     id="floatingInput" placeholder="Upload Cover">
                 <label for="floatingInput">Upload Cover</label>
+            {{-- {!!Form::file('imagePath')!!} --}}
             </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="title" id="floatingInput" placeholder="Title">
@@ -26,22 +44,21 @@
                 <input type="textarea" class="form-control" name="description" id="floatingInput" placeholder="Description">
                 <label for="floatingInput">Description</label>
             </div>
-            <div class="form-floating mb-3">
-                <select class="form-select" multiple data-mdb-placeholder="Example placeholder" multiple>
-                    <option selected value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
-                    <option value="5">Five</option>
-                  </select>
-            </div>
+
+            {!! Form::select('categories', $categories, ['class' => 'form-select col-lg-3']) !!}
+            {{-- <select class="form-select form-floating mb-3" aria-label="Default select">
+                <option selected="" value="">Selec a genre</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select> --}}
             <button class="w-100 btn btn-lg btn-danger" type="submit">Upload</button>
             {!! Form::close() !!}
         </div>
     @else
-    <div class="d-flex flex-column justify-content-center align-items-center content" >
-        <h1>Plase log in before upload your sound!</h1>
-        <a href="/login" class="btn btn-danger">Go to login</a>
-    </div>
+        <div class="d-flex flex-column justify-content-center align-items-center content">
+            <h1>Plase log in before upload your sound!</h1>
+            <a href="/login" class="btn btn-danger">Go to login</a>
+        </div>
     @endif
 @endsection

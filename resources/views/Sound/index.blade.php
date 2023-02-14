@@ -26,10 +26,11 @@
     {{-- Cards container  --}}
     <div class="d-flex flex-row flex-wrap gap-3" style="overflow: auto">
 
+        @foreach($sounds as $item)
         <!-- Card -->
         <div class="card" style="width: 350px;height: 500px;">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img class="card-img-top" src="https://mdbootstrap.com/wp-content/uploads/2019/02/flam.jpg"
+                <img class="card-img-top" src="{{asset($item->imagePath)}}"
                     alt="Card image cap">
                 <a href="#!">
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
@@ -37,157 +38,20 @@
             </div>
             <div class="card-body text-center">
 
-                <h5 class="h5 font-weight-bold"><a href="#" target="_blank">Dj Flam</a></h5>
-                <p class="mb-0">Urban Bachata remix</p>
+                <h5 class="h5 font-weight-bold"><a href="#" target="_blank">{{$item->title}}</a></h5>
+                <p class="mb-0">{{$item->description}}</p>
 
                 <audio id="music" preload="true" controls>
-                    <source src="{{ asset('sounds\\Winning Sound.mp3') }}" type="audio/mpeg">
+                    <source src="{{asset($item->soundPath)}}'" type="audio/mpeg">
+                    <source src="{{asset($item->soundPath)}}'" type="audio/wav">
+                    {{-- <source src="{{asset($item->soundPath)}}'" type="audio/mpeg">
+                    <source src="{{asset($item->soundPath)}}'" type="audio/wav"> --}}
+                    {{-- <source src="{{asset($item->soundPath)}}'" type="audio/ogg"> --}}
                 </audio>
-                {{-- <div id="audioplayer">
-                    <i id="pButton" class="fas fa-play"></i>
-                    <div id="timeline">
-                        <div id="playhead"></div>
-                    </div>
-                </div> --}}
-
             </div>
         </div>
         <!-- Card -->
-        <!-- Card -->
-        <div class="card" style="width: 350px;height: 500px;">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img class="card-img-top" src="https://mdbootstrap.com/wp-content/uploads/2019/02/flam.jpg"
-                    alt="Card image cap">
-                <a href="#!">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
-            </div>
-            <div class="card-body text-center">
-
-                <h5 class="h5 font-weight-bold"><a href="#" target="_blank">Dj Flam</a></h5>
-                <p class="mb-0">Urban Bachata remix</p>
-
-                <audio id="music" preload="true" controls>
-                    <source src="{{ asset('sounds\\Winning Sound.mp3') }}" type="audio/mpeg">
-                </audio>
-                {{-- <div id="audioplayer">
-                    <i id="pButton" class="fas fa-play"></i>
-                    <div id="timeline">
-                        <div id="playhead"></div>
-                    </div>
-                </div> --}}
-
-            </div>
-        </div>
-        <!-- Card -->
-        <!-- Card -->
-        <div class="card" style="width: 350px;height: 500px;">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img class="card-img-top" src="https://mdbootstrap.com/wp-content/uploads/2019/02/flam.jpg"
-                    alt="Card image cap">
-                <a href="#!">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
-            </div>
-            <div class="card-body text-center">
-
-                <h5 class="h5 font-weight-bold"><a href="#" target="_blank">Dj Flam</a></h5>
-                <p class="mb-0">Urban Bachata remix</p>
-
-                <audio id="music" preload="true" controls>
-                    <source src="{{ asset('sounds\\Winning Sound.mp3') }}" type="audio/mpeg">
-                </audio>
-                {{-- <div id="audioplayer">
-                    <i id="pButton" class="fas fa-play"></i>
-                    <div id="timeline">
-                        <div id="playhead"></div>
-                    </div>
-                </div> --}}
-
-            </div>
-        </div>
-        <!-- Card -->
-        <!-- Card -->
-        <div class="card" style="width: 350px;height: 500px;">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img class="card-img-top" src="https://mdbootstrap.com/wp-content/uploads/2019/02/flam.jpg"
-                    alt="Card image cap">
-                <a href="#!">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
-            </div>
-            <div class="card-body text-center">
-
-                <h5 class="h5 font-weight-bold"><a href="#" target="_blank">Dj Flam</a></h5>
-                <p class="mb-0">Urban Bachata remix</p>
-
-                <audio id="music" preload="true" controls>
-                    <source src="{{ asset('sounds\\Winning Sound.mp3') }}" type="audio/mpeg">
-                </audio>
-                {{-- <div id="audioplayer">
-                    <i id="pButton" class="fas fa-play"></i>
-                    <div id="timeline">
-                        <div id="playhead"></div>
-                    </div>
-                </div> --}}
-
-            </div>
-        </div>
-        <!-- Card -->
-        <!-- Card -->
-        <div class="card" style="width: 350px;height: 500px;">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img class="card-img-top" src="https://mdbootstrap.com/wp-content/uploads/2019/02/flam.jpg"
-                    alt="Card image cap">
-                <a href="#!">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
-            </div>
-            <div class="card-body text-center">
-
-                <h5 class="h5 font-weight-bold"><a href="#" target="_blank">Dj Flam</a></h5>
-                <p class="mb-0">Urban Bachata remix</p>
-
-                <audio id="music" preload="true" controls>
-                    <source src="{{ asset('sounds\\Winning Sound.mp3') }}" type="audio/mpeg">
-                </audio>
-                {{-- <div id="audioplayer">
-                    <i id="pButton" class="fas fa-play"></i>
-                    <div id="timeline">
-                        <div id="playhead"></div>
-                    </div>
-                </div> --}}
-
-            </div>
-        </div>
-        <!-- Card -->
-        <!-- Card -->
-        <div class="card" style="width: 350px;height: 500px;">
-            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img class="card-img-top" src="https://mdbootstrap.com/wp-content/uploads/2019/02/flam.jpg"
-                    alt="Card image cap">
-                <a href="#!">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
-            </div>
-            <div class="card-body text-center">
-
-                <h5 class="h5 font-weight-bold"><a href="#" target="_blank">Dj Flam</a></h5>
-                <p class="mb-0">Urban Bachata remix</p>
-
-                <audio id="music" preload="true" controls>
-                    <source src="{{ asset('sounds\\Winning Sound.mp3') }}" type="audio/mpeg">
-                </audio>
-                {{-- <div id="audioplayer">
-                    <i id="pButton" class="fas fa-play"></i>
-                    <div id="timeline">
-                        <div id="playhead"></div>
-                    </div>
-                </div> --}}
-
-            </div>
-        </div>
-        <!-- Card -->
+        @endforeach
     </div>
     {{-- <audio id="indie" src="{{ asset('sounds\\Winning Sound.mp3') }}" preload="auto" controls></audio> --}}
 
