@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class soundCate extends Model
 {
     use HasFactory;
+    protected $fillable = ['soundId','categoryId'];
+
 }

@@ -57,7 +57,7 @@ class AddSoundController extends Controller
         //$request->soundPath->store('sounds');
         $sound = new Sound($request->all());
         // $file = $request->file("soundPath");
-        // var_dump($file);
+        //var_dump($sound);
         // sleep(5);
         if ($request->file('soundPath') != null) {
             $fname = $request->file('soundPath');
@@ -90,6 +90,9 @@ class AddSoundController extends Controller
         } else {
             return view('Home.index');
         }
+
+        //saving to soundCate
+
     }
 
     /**
