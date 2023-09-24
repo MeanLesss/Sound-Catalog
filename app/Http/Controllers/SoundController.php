@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sound;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SoundController extends Controller
@@ -15,7 +16,12 @@ class SoundController extends Controller
     public function index()
     {
         //
-        return view('Sound.index',['sounds' => Sound::all()]);
+        $sounds = Sound::select('sounds.*', 'u.name')
+        ->join('users as u', 'sounds.userId', '=', 'u.id')
+        ->where('sounds.statusApprove',-1)
+        ->get();
+        //return var_dump($sounds);
+        return view('Sound.index',['sounds' => $sounds]);
 
     }
 

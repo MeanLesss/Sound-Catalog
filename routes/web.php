@@ -6,6 +6,7 @@ use App\Http\Controllers\SoundController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,5 +35,10 @@ Route::post('/signup', [SignUpController::class,'store'])->name('signup.store');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 //Post login is to handle when submitted form login
 Route::post('/login', [LoginController::class,'auth'])->name('login.auth');
+//Admin navigation api
+
+Route::get('/admin',[AdminController::class,'index']);
+Route::get('/admin/{soundID}',[AdminController::class,'SoundApproval']);
+
 //logout route
 Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');

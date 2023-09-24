@@ -17,6 +17,7 @@
     <nav class="nav flex-column justify-content-center align-items-center" style="height: 60%;">
         <a class="nav-item sideBtn btn {{ Request::segment(1) === 'home' ? 'active' : '' }}" href="/home">Home</a>
         <a class="nav-item sideBtn btn {{ Request::segment(1) === 'sound' ? 'active' : '' }}" href="/sound">Sound</a>
+        <a class="nav-item sideBtn btn {{ Request::segment(1) === 'sound' ? 'active' : '' }}" href="/admin">admin</a>
         {{-- {{ Session::get('logout') }} --}}
 
         @if ($value != 1)

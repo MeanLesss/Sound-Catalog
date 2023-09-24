@@ -43,6 +43,11 @@
                         <source src="{{ asset($item->soundPath) }}" type="audio/wav">
                     </audio>
                     Uploaded by : {{$item->name}}
+                    <a href="/admin/{{$item->id}}">
+                        <span class="badge rounded-pill {{$item->statusApprove == 0 ? 'text-bg-warning' : 'text-bg-success'}}">
+                            {{$item->statusApprove == 0 ? 'Pending' : 'Approved'}}
+                        </span>
+                    </a>
                 </div>
             </div>
             <!-- Card -->
