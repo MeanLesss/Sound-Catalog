@@ -81,15 +81,17 @@ class AddSoundController extends Controller
         $sound->userId = Auth::User()->id;
         $sound->statusApprove = 0;
         if ($sound->save()) {
-            return redirect(route('sound'))->with('status', 'Block is created');
+            if (Auth::User()->role == -1) {
+                // return view('Admin/Sound.index');
+                return redirect(route('admin'))->with('status', 'Block is created');
+            } else {
+                // return view('Home.index');
+                return redirect(route('sound'))->with('status', 'Block is created');
+            }
         } else {
             return back()->withInput()->with('statuses', $sound->getErrors());
         }
-        if (Auth::User()->id == 7) {
-            return view('Home.index');
-        } else {
-            return view('Home.index');
-        }
+
 
         //saving to soundCate
 

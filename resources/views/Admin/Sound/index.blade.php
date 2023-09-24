@@ -48,6 +48,19 @@
                             {{$item->statusApprove == 0 ? 'Pending' : 'Approved'}}
                         </span>
                     </a>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="badge rounded-pill {{$item->statusApprove == 0 ? 'text-bg-warning' : 'text-bg-success'}}">
+                                {{$item->statusApprove == 0 ? 'Pending' : 'Approved'}}
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                          <li> <a href="/admin/{{$item->id}}" class="dropdown-item">{{$item->statusApprove == -1 ? 'Pending' : 'Approve'}}</a></li>
+                          <li><a class="dropdown-item" href="#">Edit</a></li>
+                          <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                        </ul>
+                      </div>
                 </div>
             </div>
             <!-- Card -->

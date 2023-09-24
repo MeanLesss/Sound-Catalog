@@ -36,9 +36,12 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 //Post login is to handle when submitted form login
 Route::post('/login', [LoginController::class,'auth'])->name('login.auth');
 //Admin navigation api
-
-Route::get('/admin',[AdminController::class,'index']);
+// sound
+Route::get('/admin',[AdminController::class,'index'])->name('admin');
 Route::get('/admin/{soundID}',[AdminController::class,'SoundApproval']);
+// Category
+Route::get('/category',[AdminController::class,'CategoryIndex']);
+Route::post('/category/save',[AdminController::class,'SaveCategory']);
 
 //logout route
 Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');

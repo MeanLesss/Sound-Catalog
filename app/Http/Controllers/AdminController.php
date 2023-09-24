@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Sound;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -17,6 +19,27 @@ class AdminController extends Controller
         //return var_dump($sounds);
         return view('Admin/Sound.index',['sounds' => $sounds]);
     }
+
+    public function CategoryIndex()
+    {
+        //
+        $categories = Category::all();
+        //return var_dump($sounds);
+        return view('Admin/Category.index',['categories' => $categories]);
+    }
+
+    public function SaveCategory(Request $request) {
+        if ($request->has('title')) {
+            $rows = [];
+            foreach ($request->input('title') as $title) {
+                $rows[] = ['tagName' => $title,'created_at'=>Carbon::Now(),'updated_at'=>Carbon::Now()];
+            }
+            Category::insert($rows);
+        }
+
+        return redirect('/category');
+    }
+
     public function SoundApproval(int $soundID)
     {
         $sound = Sound::where('id',$soundID)->first();
@@ -28,7 +51,7 @@ class AdminController extends Controller
             }
             $sound->save();
         }
-        return $this->index();
+        return redirect('/admin');
     }
 
 }
