@@ -24,6 +24,18 @@ class SoundController extends Controller
         return view('Sound.index',['sounds' => $sounds]);
 
     }
+    public function SearchSound(Request $request)
+    {
+        //
+        $sounds = Sound::select('sounds.*', 'u.name')
+        ->join('users as u', 'sounds.userId', '=', 'u.id')
+        ->where('sounds.statusApprove', -1)
+        ->where('sounds.title', 'like', '%' . $request->inputSearch . '%')
+        ->get();
+        //return var_dump($sounds);
+        return view('Sound.index',['sounds' => $sounds]);
+
+    }
 
     /**
      * Show the form for creating a new resource.

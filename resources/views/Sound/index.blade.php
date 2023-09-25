@@ -18,9 +18,12 @@
                     </div> --}}
             </div>
             <a class="btn btn-danger btn-outline-secondary" href="/sound/add">Add Sound ➕</a>
-            <input type="text" class="rounded form-control" placeholder="Search your sound"
-                aria-label="Text input with dropdown button">
-            <a class="btn btn-outline-secondary" href="#">Search 🔍</a>
+            <form action="/sound/search" method="POST" class="w-100 row">
+                @csrf
+                <input type="text" class="rounded form-control col-6" placeholder="Search your sound"
+                aria-label="Text input with dropdown button" name="inputSearch">
+                <button class="btn btn-outline-secondary col-2" type="submit">Search 🔍</button>
+            </form>
         </div>
     </div>
     {{-- Cards container  --}}
@@ -31,7 +34,7 @@
             <div class="card" style="width: 350px;height: 500px;">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                     <img class="card-img-top" src="{{ asset($item->imagePath) }}" alt="Card image cap"
-                        style="width:340px ;height:300px">
+                        style="width:340px ;height:200px">
                 </div>
                 <div class="card-body text-center">
                     <h5 class="h5 font-weight-bold"><a href="#" target="_blank">{{ $item->title }}</a></h5>
@@ -43,6 +46,8 @@
                         <source src="{{ asset($item->soundPath) }}" type="audio/wav">
                     </audio>
                     Uploaded by : {{$item->name}}
+                    <br/>
+                    Category : {{$item->category}}
                 </div>
             </div>
             <!-- Card -->

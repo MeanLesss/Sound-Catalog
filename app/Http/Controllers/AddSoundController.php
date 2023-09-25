@@ -19,7 +19,7 @@ class AddSoundController extends Controller
     {
         //
         // return view('Sound.addSound');
-        $categories = Category::all()->pluck('tagName');
+        $categories = Category::pluck('tagName','tagName')->all();
         return view(
             'Sound.addSound',
             [
@@ -51,7 +51,7 @@ class AddSoundController extends Controller
         $upload = $request->validate([
             'soundPath' => 'required',
             'title' => 'required',
-            'categories' => 'required',
+            'category' => 'required',
         ]);
 
         //$request->soundPath->store('sounds');

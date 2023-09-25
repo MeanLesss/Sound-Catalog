@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Sound;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -27,6 +28,13 @@ class AdminController extends Controller
         //return var_dump($sounds);
         return view('Admin/Category.index',['categories' => $categories]);
     }
+    public function UserIndex()
+    {
+        //
+        $users = User::all();
+        //return var_dump($sounds);
+        return view('Admin/User.index',['users' => $users]);
+    }
 
     public function SaveCategory(Request $request) {
         if ($request->has('title')) {
@@ -39,7 +47,18 @@ class AdminController extends Controller
 
         return redirect('/category');
     }
+    public function SearchSound(Request $request)
+    {
+        //
+        $sounds = Sound::select('sounds.*', 'u.name')
+        ->join('users as u', 'sounds.userId', '=', 'u.id')
+        ->where('sounds.statusApprove', -1)
+        ->where('sounds.title', 'like', '%' . $request->inputSearch . '%')
+        ->get();
+        //return var_dump($sounds);
+        return view('Admin/Sound.index',['sounds' => $sounds]);
 
+    }
     public function SoundApproval(int $soundID)
     {
         $sound = Sound::where('id',$soundID)->first();

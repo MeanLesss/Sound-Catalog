@@ -44,14 +44,9 @@
                 <input type="textarea" class="form-control" name="description" id="floatingInput" placeholder="Description">
                 <label for="floatingInput">Description</label>
             </div>
+            <label for="floatingInput">Category</label>
+            {!! Form::select('category', $categories, null, ['class' => 'form-select col-lg-3']) !!}
 
-            {!! Form::select('categories', $categories, ['class' => 'form-select col-lg-3']) !!}
-            {{-- <select class="form-select form-floating mb-3" aria-label="Default select">
-                <option selected="" value="">Selec a genre</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select> --}}
             <button class="w-100 btn btn-lg btn-danger" type="submit">Upload</button>
             {!! Form::close() !!}
         </div>
