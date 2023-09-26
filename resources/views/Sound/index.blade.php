@@ -20,6 +20,8 @@
             <a class="btn btn-danger btn-outline-secondary" href="/sound/add">Add Sound ➕</a>
             <form action="/sound/search" method="POST" class="w-100 row">
                 @csrf
+                {!! Form::select('category', $category, null, ['class' => 'form-select col-lg-3']) !!}
+
                 <input type="text" class="rounded form-control col-6" placeholder="Search your sound"
                 aria-label="Text input with dropdown button" name="inputSearch">
                 <button class="btn btn-outline-secondary col-2" type="submit">Search 🔍</button>

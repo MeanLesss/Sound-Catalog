@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sound;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class SoundController extends Controller
@@ -11,7 +12,7 @@ class SoundController extends Controller
     /**
      * Display a listing of the resource.
      *
-    //  * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -21,7 +22,7 @@ class SoundController extends Controller
         ->where('sounds.statusApprove',-1)
         ->get();
         //return var_dump($sounds);
-        return view('Sound.index',['sounds' => $sounds]);
+        return view('Sound.index',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
 
     }
     public function SearchSound(Request $request)

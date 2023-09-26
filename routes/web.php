@@ -43,6 +43,8 @@ Route::get('/admin/{soundID}',[AdminController::class,'SoundApproval']);
 Route::post('/admin/sound/search',[AdminController::class,'SearchSound']);
 // Category
 Route::get('/category',[AdminController::class,'CategoryIndex']);
+Route::get('/category/edit/{id}/{changes}',[AdminController::class,'EditCategory']);
+Route::get('/category/delete/{id}',[AdminController::class,'DeleteCategory']);
 Route::post('/category/save',[AdminController::class,'SaveCategory']);
 //user
 Route::get('/users',[AdminController::class,'UserIndex']);

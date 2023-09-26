@@ -18,7 +18,7 @@ class AdminController extends Controller
         ->orderBy('sounds.statusApprove','desc')
         ->get();
         //return var_dump($sounds);
-        return view('Admin/Sound.index',['sounds' => $sounds]);
+        return view('Admin/Sound.index',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
     }
 
     public function CategoryIndex()
@@ -36,13 +36,42 @@ class AdminController extends Controller
         return view('Admin/User.index',['users' => $users]);
     }
 
+  /**
+   * The DeleteCategory function deletes a category with the specified ID and returns the index view
+   * for the admin category page.
+   *
+   * @param int id The parameter "id" is an integer that represents the ID of the category that needs
+   * to be deleted.
+   *
+   * @return a view called 'Admin/Category.index'.
+   */
+    public function DeleteCategory(int $id) {
+        Category::where('id',$id)->first()->delete();
+        return view('Admin/Category.index',['categories' => Category::all()]);
+    }
+    public function EditCategory(int $id,string $changes) {
+        // return var_dump([$id,$changes]);
+        $category = Category::find($id);
+        if ($category) {
+            $category->tagName = $changes;
+            $category->updated_at = Carbon::now();
+            $category->save();
+        }
+        return view('Admin/Category.index',['categories' =>  Category::all()]);
+    }
+
     public function SaveCategory(Request $request) {
-        if ($request->has('title')) {
+        if ($request->has('title')) { //Create
             $rows = [];
             foreach ($request->input('title') as $title) {
                 $rows[] = ['tagName' => $title,'created_at'=>Carbon::Now(),'updated_at'=>Carbon::Now()];
             }
             Category::insert($rows);
+        }else{ //Update
+            if ($request->has('editInput')) {
+                $id = $request -> input('editInput');
+                return var_dump($id);
+            }
         }
 
         return redirect('/category');
@@ -54,9 +83,10 @@ class AdminController extends Controller
         ->join('users as u', 'sounds.userId', '=', 'u.id')
         ->where('sounds.statusApprove', -1)
         ->where('sounds.title', 'like', '%' . $request->inputSearch . '%')
+        ->orWhere('sounds.category', 'like', '%' . $request->inputSearch . '%')
         ->get();
         //return var_dump($sounds);
-        return view('Admin/Sound.index',['sounds' => $sounds]);
+        return view('Admin/Sound.index',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
 
     }
     public function SoundApproval(int $soundID)

@@ -18,10 +18,12 @@
                     </div> --}}
             </div>
             <a class="btn btn-danger btn-outline-secondary" href="/sound/add">Add Sound ➕</a>
-            <form action="/admin/sound/search" method="POST" class="w-100 row">
+            <form action="/admin/sound/search" method="POST" class="w-100 row" id="searchForm">
                 @csrf
+                {!! Form::select('category', $category, null, ['class' => 'form-select col-lg-3','id'=>'sorter']) !!}
+
                 <input type="text" class="rounded form-control col-6" placeholder="Search your sound"
-                aria-label="Text input with dropdown button" name="inputSearch">
+                aria-label="Text input with dropdown button" id="inputSearch" name="inputSearch">
                 <button class="btn btn-outline-secondary col-2" type="submit">Search 🔍</button>
             </form>
         </div>
@@ -67,5 +69,10 @@
         @endforeach
     </div>
     {{-- <audio id="indie" src="{{ asset('sounds\\Winning Sound.mp3') }}" preload="auto" controls></audio> --}}
-
+<script>
+    document.getElementById('sorter').addEventListener('change', function() {
+        document.getElementById('inputSearch').value = this.value;
+        document.getElementById('searchForm').submit();
+    });
+</script>
 @endsection
