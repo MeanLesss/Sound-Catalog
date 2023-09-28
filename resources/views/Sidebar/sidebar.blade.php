@@ -18,10 +18,12 @@
                 <a class="nav-item sideBtn btn {{ Request::segment(1) === 'home' ? 'active' : '' }}" href="/home">Home</a>
                 <a class="nav-item sideBtn btn {{ Request::segment(1) === 'sound' ? 'active' : '' }}"
                     href="/sound">Sound</a>
+                    <a class="nav-item sideBtn btn btn-info d-hidden" href="/uploaded">Uploaded</a>
             @endif
             {{-- {{ Session::get('logout') }} --}}
 
             @if ($value != 1)
+
                 <a class="nav-item sideBtn btn btn-danger d-hidden" href="/logout">Log out</a>
             @endif
         </nav>

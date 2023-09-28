@@ -27,9 +27,13 @@ Route::get('/sidebar',function(){
 Route::get('/home', [HomeController::class,'index']);
 Route::get('/sound', [SoundController::class,'index'])->name('sound');
 Route::get('/sound/add', [AddSoundController::class, 'index']);
+Route::get('/sound/edit/{id}', [AddSoundController::class, 'editPage']);
+Route::get('/sound/delete/{id}', [AddSoundController::class, 'submitDelete']);
+Route::post('/sound/submitEdit', [AddSoundController::class, 'submitEdit']);
+Route::get('/uploaded',[SoundController::class,'uploaded'])->name('sound.uploaded');
+Route::post('/sound/search',[SoundController::class,'SearchSound'])->name('sound.search');
 // Route::resource('/sound/add',AddSoundController::class);
 Route::post('/sound/add',[AddSoundController::class,'store'])->name('sound.add');
-Route::post('/sound/search',[SoundController::class,'SearchSound'])->name('sound.search');
 Route::get('/signup', [SignUpController::class,'index']);
 Route::post('/signup', [SignUpController::class,'store'])->name('signup.store');
 // Get login is to redirect to login page
@@ -38,7 +42,7 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class,'auth'])->name('login.auth');
 //Admin navigation api
 // sound
-Route::get('/admin',[AdminController::class,'index'])->name('admin`');
+Route::get('/admin',[AdminController::class,'index'])->name('admin');
 Route::get('/admin/{soundID}',[AdminController::class,'SoundApproval']);
 Route::post('/admin/sound/search',[AdminController::class,'SearchSound']);
 // Category

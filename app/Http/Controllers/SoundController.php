@@ -6,6 +6,7 @@ use App\Models\Sound;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SoundController extends Controller
 {
@@ -25,16 +26,32 @@ class SoundController extends Controller
         return view('Sound.index',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
 
     }
+    public function uploaded()
+    {
+        //
+        $sounds = Sound::select('sounds.*', 'u.name')
+        ->join('users as u', 'sounds.userId', '=', 'u.id')
+        ->where('userId', Auth::user()->id)
+        ->get();
+        //return var_dump($sounds);
+        return view('Sound.uploaded',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
+
+    }
     public function SearchSound(Request $request)
     {
         //
+        //return var_dump($sounds);
+        if($request->uploaded == null){
+            return view('Sound.index',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
+
+
+        }
         $sounds = Sound::select('sounds.*', 'u.name')
         ->join('users as u', 'sounds.userId', '=', 'u.id')
         ->where('sounds.statusApprove', -1)
         ->where('sounds.title', 'like', '%' . $request->inputSearch . '%')
         ->get();
-        //return var_dump($sounds);
-        return view('Sound.index',['sounds' => $sounds]);
+        return view('Sound.uploaded',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
 
     }
 

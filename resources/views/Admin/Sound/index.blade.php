@@ -17,7 +17,7 @@
                         <a class="dropdown-item" href="#">Separated link</a>
                     </div> --}}
             </div>
-            <a class="btn btn-danger btn-outline-secondary" href="/sound/add">Add Sound ➕</a>
+            <a class="btn btn-danger btn-outline-secondary" href="/sound/add">Upload Sound ➕</a>
             <form action="/admin/sound/search" method="POST" class="w-100 row" id="searchForm">
                 @csrf
                 {!! Form::select('category', $category, null, ['class' => 'form-select col-lg-3','id'=>'sorter']) !!}
@@ -59,8 +59,8 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
                           <li> <a href="/admin/{{$item->id}}" class="dropdown-item">{{$item->statusApprove == -1 ? 'Pending' : 'Approve'}}</a></li>
-                          <li><a class="dropdown-item" href="#">Edit</a></li>
-                          <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                          <li><a class="dropdown-item" href="/sound/edit/{{$item->id}}">Edit</a></li>
+                          <li><a class="dropdown-item text-danger" href="/sound/delete/{{$item->id}}">Delete</a></li>
                         </ul>
                       </div>
                 </div>

@@ -28,7 +28,66 @@ class AddSoundController extends Controller
             ]
         );
     }
+    public function editPage(int $id)
+    {
+        $categories = Category::pluck('tagName','tagName')->all();
+        $sound = Sound::where('id',$id)->first();
+        return view(
+            'Sound.addSound',
+            [
+                'sound' => $sound,
+                'categories' => $categories
+            ]
+        );
+    }
+    public function submitEdit(Request $request)
+    {
+        $edit = $request->validate([
+            'id' =>'required',
+            'title' => 'required',
+            'category' => 'required',
+        ]);
 
+        if($edit){
+            $found = Sound::where('id',$request->id)->first();
+            $found->title = $request->title;
+            $found->description = $request->description;
+            $found->category = $request->category;
+            $found->save();
+        }
+
+        //return var_dump($sounds);
+        if(Auth::user()->role == -1){
+            $sounds = Sound::select('sounds.*', 'u.name')
+            ->join('users as u', 'sounds.userId', '=', 'u.id')
+            ->get();
+            return view('Admin/Sound.index',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
+        }else{
+            $sounds = Sound::select('sounds.*', 'u.name')
+            ->join('users as u', 'sounds.userId', '=', 'u.id')
+            ->where('sounds.statusApprove',-1)
+            ->get();
+            return view('Sound.index',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
+        }
+    }
+    public function submitDelete(int $id)
+    {
+        if($id != null && $id !='' & $id > 0)
+        {
+            Sound::where('id',$id)->first()->delete();
+        }
+        $sounds = Sound::select('sounds.*', 'u.name')
+        ->join('users as u', 'sounds.userId', '=', 'u.id')
+        ->where('sounds.statusApprove',-1)
+        ->get();
+        //return var_dump($sounds);
+        if(Auth::user()->role == -1){
+            return view('Admin/Sound.index',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
+        }else{
+            return view('Sound.index',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
+
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
