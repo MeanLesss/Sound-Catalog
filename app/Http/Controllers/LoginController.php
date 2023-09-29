@@ -23,11 +23,23 @@ class LoginController extends Controller
     }
     public function auth(Request $request)
     {
+       /* The code block you provided is the `auth` method of the `LoginController` class. */
         $cred = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
         if (Auth::attempt($cred)) {
+            // Get the logged in user
+            $user = Auth::user();
+
+            // Check if the user is banned
+            if ($user->statusBan == 1) {
+                // If the user is banned, logout and redirect them to a banned page
+                Auth::logout();
+                return back()->withErrors([
+                    'statusBan' => 'Your account has been ban due to policy violation!'
+                ])->onlyInput('email');
+            }
             $request->session()->regenerate();
             Session::put('logout', false);
             return redirect('/home');
