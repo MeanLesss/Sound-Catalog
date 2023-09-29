@@ -51,7 +51,9 @@ Route::get('/category/edit/{id}/{changes}',[AdminController::class,'EditCategory
 Route::get('/category/delete/{id}',[AdminController::class,'DeleteCategory']);
 Route::post('/category/save',[AdminController::class,'SaveCategory']);
 //user
-Route::get('/users',[AdminController::class,'UserIndex']);
+Route::get('/users',[AdminController::class,'UserIndex'])->name('users');
+Route::get('/admin/ban/{id}',[AdminController::class,'BanUser']) ;
+Route::get('/user/delete/{id}',[AdminController::class,'DeleteUser']) ;
 
 //logout route
 Route::get('/logout', [LogoutController::class,'perform'])->name('logout.perform');

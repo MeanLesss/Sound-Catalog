@@ -13,7 +13,7 @@
         {!! Form::open(['route' => 'signup.store','method' => 'POST',  'style' => 'max-width:50%;width:30%;']) !!}
         {{-- <form action="{{url('login.store')}}" method="POST" style = "max-width:50%;width:30%;">
             @csrf --}}
-            <h1 class="mb-5">Sign up</h1>
+            <h1 class="mb-5">Create account</h1>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="name" id="floatingInput" placeholder="Username">
                 <label for="floatingInput">Username</label>
@@ -32,7 +32,7 @@
                 <label for="floatingPassword">Confirm password</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Save</button>
         {{-- </form> --}}
         {!! Form::close() !!}
         </main>

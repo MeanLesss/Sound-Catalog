@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class SignUpController extends Controller
 {
@@ -48,7 +49,11 @@ class SignUpController extends Controller
             $user->statusBan = 0;
             // $user->save();
             if ($user->save()) {
-                return redirect()->route('login')->with('status', 'Sign up successfully');
+                if(Auth::user()->role == -1){
+                    return redirect()->route('users')->with('status', 'Sign up successfully');
+                }else{
+                    return redirect()->route('login')->with('status', 'Sign up successfully');
+                }
             }else {
                 return back()->withInput()->with('statuses', $user->getErrors());
             }

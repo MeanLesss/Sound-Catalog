@@ -31,11 +31,23 @@ class AdminController extends Controller
     public function UserIndex()
     {
         //
-        $users = User::all();
+        $users = User::where('role','<>','-1')->get();
         //return var_dump($sounds);
         return view('Admin/User.index',['users' => $users]);
     }
+    public function BanUser(int $id)
+    {
+        $user = User::where('id',$id)->first();
+        $user->statusBan = $user->statusBan == 0 ? 1 : 0;
+        $user->save();
+        return redirect()->action([AdminController::class, 'UserIndex']);
+    }
+    public function DeleteUser(int $id)
+    {
+        $user = User::where('id',$id)->first()->delete();
 
+        return redirect()->action([AdminController::class, 'UserIndex']);
+    }
   /**
    * The DeleteCategory function deletes a category with the specified ID and returns the index view
    * for the admin category page.
