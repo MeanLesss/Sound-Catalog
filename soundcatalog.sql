@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:33063
--- Generation Time: Feb 16, 2023 at 04:03 PM
+-- Generation Time: Sep 30, 2023 at 10:32 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -39,7 +39,11 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `tagName`, `created_at`, `updated_at`) VALUES
-(1, 'winning', NULL, NULL);
+(1, 'Happy happy', NULL, '2023-09-30 00:51:22'),
+(5, 'Funky', '2023-09-24 10:22:08', '2023-09-24 10:22:08'),
+(6, 'Fun', '2023-09-24 10:22:08', '2023-09-24 10:22:08'),
+(7, 'Welcome', '2023-09-26 09:55:27', '2023-09-26 09:55:27'),
+(8, 'Hello', '2023-09-26 09:58:57', '2023-09-28 05:57:37');
 
 -- --------------------------------------------------------
 
@@ -153,18 +157,11 @@ CREATE TABLE `sounds` (
   `description` varchar(255) DEFAULT NULL,
   `soundPath` varchar(255) NOT NULL,
   `imagePath` varchar(255) DEFAULT NULL,
-  `statusApprove` tinyint(1) NOT NULL,
+  `category` varchar(45) DEFAULT NULL,
+  `statusApprove` tinyint(1) NOT NULL DEFAULT 0 COMMENT '-1: approved , \\n0:not approved',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `sounds`
---
-
-INSERT INTO `sounds` (`id`, `userId`, `title`, `description`, `soundPath`, `imagePath`, `statusApprove`, `created_at`, `updated_at`) VALUES
-(1, 7, 'Please', 'work', 'sounds\\Losing Sound.mp3', '/images/default.png', 0, '2023-02-12 08:46:36', '2023-02-12 08:46:36'),
-(11, 7, 'Pick up sound', 'This sound can be used in game as sound effect', 'sounds\\Pick up sound.wav', '/images/Sketchpad.png', 0, '2023-02-14 08:52:08', '2023-02-14 08:52:08');
 
 -- --------------------------------------------------------
 
@@ -178,24 +175,20 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `role` int(11) DEFAULT 1 COMMENT '-1 : admin, 1 : user;',
   `remember_token` varchar(100) DEFAULT NULL,
-  `statusBan` tinyint(1) NOT NULL,
+  `statusBan` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 : not ban ,1 :ban',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `userscol` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `statusBan`, `created_at`, `updated_at`) VALUES
-(1, 'mean', 'sokvimean@gmail.com', '2023-02-01 15:11:57', '$2y$10$wXZVIJ2SMjfoWHvUxgA2o.IQd3YBzj4jjbrUfO3Ithi8okVqMODqq', NULL, 0, '2023-02-06 15:11:57', '2023-02-06 15:11:57'),
-(7, 'nich', 'nich@gmail.com', NULL, '$2y$10$JCpX2kBe/glp1ElITFQgfOtSfAi5VF.9T0yionQzcj3ZElFcbX7s6', NULL, 0, '2023-02-08 06:29:08', '2023-02-08 06:29:08'),
-(8, 'nich2', 'nich2@gmail.com', NULL, '$2y$10$wKHQyoOF3KUvCfWN3QII9OAqJH0AzadeOkv3bwFqIROHd73V2ICK6', NULL, 0, '2023-02-09 04:18:33', '2023-02-09 04:18:33'),
-(9, 'mean2', 'sokvimean2@gmail.com', NULL, '$2y$10$B0HceHWs0Y3p1B2168RMJOoL/tON1ucgiegrRf/bQw3R5DbdDD24e', NULL, 0, '2023-02-09 04:24:17', '2023-02-09 04:24:17'),
-(12, 'mean3', 'sokvimean3@gmail.com', NULL, '$2y$10$SiIzugABPuk3Tjjpf972xOTbMGosc9n3Is93868.ut6bq6u/7By/y', NULL, 0, '2023-02-09 04:28:51', '2023-02-09 04:28:51'),
-(13, 'mean4', 'sokvimean4@gmail.com', NULL, '$2y$10$SNCghN0lPZHg7JnAO4e6U.TPCdosCGTZW39UMBBYNPj51lJtFvq2O', NULL, 0, '2023-02-09 04:29:43', '2023-02-09 04:29:43'),
-(14, 'mean5', 'sokvimean5@gmail.com', NULL, '$2y$10$M5eut8lmsV3IcplezD1GQ.4gIL9AEBtw.snghLYvOOIYeMyX1.vZ2', NULL, 0, '2023-02-09 04:31:02', '2023-02-09 04:31:02');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `statusBan`, `created_at`, `updated_at`, `userscol`) VALUES
+ (1, 'admin', 'admin@admin.com', NULL, '$2y$10$wXZVIJ2SMjfoWHvUxgA2o.IQd3YBzj4jjbrUfO3Ithi8okVqMODqq', -1, NULL, 0, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -274,7 +267,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `complain`
@@ -310,13 +303,13 @@ ALTER TABLE `soundcate`
 -- AUTO_INCREMENT for table `sounds`
 --
 ALTER TABLE `sounds`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables

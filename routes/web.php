@@ -34,7 +34,7 @@ Route::get('/uploaded',[SoundController::class,'uploaded'])->name('sound.uploade
 Route::post('/sound/search',[SoundController::class,'SearchSound'])->name('sound.search');
 // Route::resource('/sound/add',AddSoundController::class);
 Route::post('/sound/add',[AddSoundController::class,'store'])->name('sound.add');
-Route::get('/signup', [SignUpController::class,'index']);
+Route::get('/signup/{id}', [SignUpController::class,'index']);
 Route::post('/signup', [SignUpController::class,'store'])->name('signup.store');
 // Get login is to redirect to login page
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -53,6 +53,8 @@ Route::post('/category/save',[AdminController::class,'SaveCategory']);
 //user
 Route::get('/users',[AdminController::class,'UserIndex'])->name('users');
 Route::get('/admin/ban/{id}',[AdminController::class,'BanUser']) ;
+Route::get('/user/edit/{id}',[SignUpController::class,'index']) ;
+Route::post('/user/edit/submit',[SignUpController::class,'update']) ->name('signup.update');;
 Route::get('/user/delete/{id}',[AdminController::class,'DeleteUser']) ;
 
 //logout route

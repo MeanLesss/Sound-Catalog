@@ -42,6 +42,15 @@ class AdminController extends Controller
         $user->save();
         return redirect()->action([AdminController::class, 'UserIndex']);
     }
+
+
+    public function SubmitEdit(int $id)
+    {
+        $user = User::where('id',$id)->first();
+        // $user->statusBan = $user->statusBan == 0 ? 1 : 0;
+        $user->save();
+        return redirect()->action([AdminController::class, 'UserIndex']);
+    }
     public function DeleteUser(int $id)
     {
         $user = User::where('id',$id)->first()->delete();

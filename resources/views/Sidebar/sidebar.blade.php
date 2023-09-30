@@ -31,7 +31,7 @@
         <nav class="nav flex-column justify-content-start align-items-center" style="height: auto;">
             <a class="nav-item sideBtn btn {{ Request::segment(1) === 'login' ? 'active' : '' }}" href="/login">Log in</a>
             <a class="nav-item sideBtn btn btn-danger {{ Request::segment(1) === 'signup' ? 'active' : '' }}"
-                href="/signup">Sign up</a>
+                href="/signup/-1">Sign up</a>
             <a class="nav-item sideBtn btn {{ Request::segment(1) === 'home' ? 'active' : '' }}" href="/home">Home</a>
         </nav>
     @endif

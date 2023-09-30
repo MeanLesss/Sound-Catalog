@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Sound;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -13,12 +15,17 @@ class SignUpController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(int $id)
     {
         //
-        return view('Home.signup');
-    }
+        if($id == null || $id <= 0){
+            return view('Home.signup', ['user' => new User()]);
+        }else{
+            $user = User::where('id',$id)->first();
+            return view('Home.signup', ['user' => $user]);
+        }
 
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -49,7 +56,7 @@ class SignUpController extends Controller
             $user->statusBan = 0;
             // $user->save();
             if ($user->save()) {
-                if(Auth::user()->role == -1){
+                if(!empty(Auth::user()->role) && Auth::user()->role == -1){
                     return redirect()->route('users')->with('status', 'Sign up successfully');
                 }else{
                     return redirect()->route('login')->with('status', 'Sign up successfully');
@@ -89,9 +96,35 @@ class SignUpController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required'],
+        ]);
+        $user = User::where('id',$request->id)->first();
+
+        if ($user != null) {
+             $user->name = $request->name;
+             $user->email = $request->email;
+            $user->save();
+            if ($user->save()) {
+                if(Auth::user()->role == -1){
+                         //
+                    $sounds = Sound::select('sounds.*', 'u.name')
+                    ->join('users as u', 'sounds.userId', '=', 'u.id')
+                    ->orderBy('sounds.statusApprove','desc')
+                    ->get();
+                    //return var_dump($sounds);
+                    return view('Admin/Sound.index',['sounds' => $sounds,'category'=>Category::pluck('tagName','tagName')->all()]);
+                }else{
+                    return redirect()->route('sound')->with('status', 'Update successfully');
+                }
+            }else {
+                return back()->withInput()->with('statuses', $user->getErrors());
+            }
+        }
     }
 
     /**
